@@ -21,9 +21,9 @@ int BilinearSamplerBHWD_updateOutput_cuda(THCudaTensor *canvas, THCudaTensor *in
 //  THCudaTensor *output = (THCudaTensor *)luaT_checkudata(L, 4, "torch.CudaTensor");
 
   int success = 0;
-  success = BilinearSamplerBHWD_updateOutput_cuda_kernel(output->size[2],
-                                               output->size[1],
-                                               output->size[0],
+  success = BilinearSamplerBHWD_updateOutput_cuda_kernel(THCudaTensor_size(state, output, 2),
+                                               THCudaTensor_size(state, output, 1),
+                                               THCudaTensor_size(state, output, 0),
                                                THCudaTensor_data(state, inputImages),
                                                THCudaTensor_stride(state, inputImages, 0),
                                                THCudaTensor_stride(state, inputImages, 3),
@@ -74,9 +74,9 @@ int BilinearSamplerBHWD_updateGradInput_cuda(THCudaTensor *canvas, THCudaTensor 
 //  THCudaTensor *gradOutput = (THCudaTensor *)luaT_checkudata(L, 6, "torch.CudaTensor");
 
   int success = 0;
-  success = BilinearSamplerBHWD_updateGradInput_cuda_kernel(gradOutput->size[2],
-                                                  gradOutput->size[1],
-                                                  gradOutput->size[0],
+  success = BilinearSamplerBHWD_updateGradInput_cuda_kernel(THCudaTensor_size(state, gradOutput, 2),
+                                                  THCudaTensor_size(state, gradOutput, 1),
+                                                  THCudaTensor_size(state, gradOutput, 0),
                                                   THCudaTensor_data(state, inputImages),
                                                   THCudaTensor_stride(state, inputImages, 0),
                                                   THCudaTensor_stride(state, inputImages, 3),
@@ -146,9 +146,9 @@ int BilinearSamplerBHWD_updateGradInputOnlyGrid_cuda(THCudaTensor *inputImages, 
 
   int success = 0;
   success = BilinearSamplerBHWD_updateGradInputOnlyGrid_cuda_kernel(
-                                                  gradOutput->size[2],
-                                                  gradOutput->size[1],
-                                                  gradOutput->size[0],
+                                                  THCudaTensor_size(state, gradOutput, 2),
+                                                  THCudaTensor_size(state, gradOutput, 1),
+                                                  THCudaTensor_size(state, gradOutput, 0),
                                                   THCudaTensor_size(state, inputImages, 3),
                                                   THCudaTensor_size(state, inputImages, 1),
                                                   THCudaTensor_size(state, inputImages, 2),
